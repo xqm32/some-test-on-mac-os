@@ -19,6 +19,14 @@ func main() {
 	println("Real exeOld is", exeOld)
 
 	tempDir := os.TempDir()
+	println("tempDir is", tempDir)
+
+	tempDir, err = filepath.EvalSymlinks(exeOld)
+	if err != nil {
+		panic(err)
+	}
+	println("Real tempDir is", tempDir)
+
 	exeNewDir := filepath.Join(tempDir, "path/to")
 	if err := os.MkdirAll(exeNewDir, 0755); err != nil {
 		panic(err)
