@@ -12,8 +12,13 @@ func main() {
 		panic(err)
 	}
 
-	exeNewDir := os.TempDir()
-	exeNew := filepath.Join(exeNewDir, "exeNew")
+	tempDir := os.TempDir()
+	exeNewDir := filepath.Join(tempDir, "path/to/exeNew")
+	if err := os.MkdirAll(exeNewDir, 0755); err != nil {
+		panic(err)
+	}
+
+	exeNew := filepath.Join(exeNewDir)
 	println("exeNew is ", exeNew)
 	exeOldRel, err := filepath.Rel(exeNewDir, exeOld)
 	println("exeOldRel is ", exeOldRel)

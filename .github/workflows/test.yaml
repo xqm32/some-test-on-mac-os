@@ -21,13 +21,5 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Restore Go modules cache
-        uses: actions/cache@v3
-        with:
-          path: ~/go/pkg/mod
-          key: go-${{ runner.os }}-${{ hashFiles('go.mod') }}
-          restore-keys: |
-            go-${{ runner.os }}-
-
       - name: Run tests
         run: go run main.go
