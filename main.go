@@ -7,10 +7,16 @@ import (
 
 func main() {
 	exeOld, err := os.Executable()
-	println("exeOld is ", exeOld)
 	if err != nil {
 		panic(err)
 	}
+	println("exeOld is", exeOld)
+
+	exeOld, err = filepath.EvalSymlinks(exeOld)
+	if err != nil {
+		panic(err)
+	}
+	println("Real exeOld is", exeOld)
 
 	tempDir := os.TempDir()
 	exeNewDir := filepath.Join(tempDir, "path/to")
@@ -19,9 +25,9 @@ func main() {
 	}
 
 	exeNew := filepath.Join(exeNewDir, "exeNew")
-	println("exeNew is ", exeNew)
+	println("exeNew is", exeNew)
 	exeOldRel, err := filepath.Rel(exeNewDir, exeOld)
-	println("exeOldRel is ", exeOldRel)
+	println("exeOldRel is", exeOldRel)
 	if err != nil {
 		panic(err)
 	}
