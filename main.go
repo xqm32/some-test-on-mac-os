@@ -21,7 +21,7 @@ func main() {
 	tempDir := os.TempDir()
 	println("tempDir is", tempDir)
 
-	tempDir, err = filepath.EvalSymlinks(exeOld)
+	tempDir, err = filepath.EvalSymlinks(tempDir)
 	if err != nil {
 		panic(err)
 	}
